@@ -13,7 +13,7 @@ export const FerramentasDaListagem: React.FC<IFerramentasDaListagemProps> = ({ t
 	const theme = useTheme();
 
 	return (
-		<Box height={theme.spacing(5)} marginX={1} padding={1} paddingX={2} display='flex' gap={1} alignItems='center' component={Paper}>
+		<Box gap={1} marginX={1} padding={1} paddingX={2} display='flex' alignItems='center' height={theme.spacing(5)} component={Paper}>
 
 			{mostrarInputBusca && (
 				<TextField size='small' placeholder='Pesquisar...'
@@ -22,7 +22,7 @@ export const FerramentasDaListagem: React.FC<IFerramentasDaListagemProps> = ({ t
 
 			<Box flex={1} display='flex' justifyContent='end'>
 				{mostrarBotaoNovo && (
-					<Button variant='contained' color='primary' endIcon={<Icon>add</Icon>} onClick={clicarEmNovo} disableElevation>
+					<Button variant='contained' color='primary' startIcon={<Icon>add</Icon>} onClick={clicarEmNovo} disableElevation>
 						{textoBotaoNovo}
 					</Button>
 				)}
