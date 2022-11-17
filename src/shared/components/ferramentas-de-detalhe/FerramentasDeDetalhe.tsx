@@ -64,7 +64,7 @@ export const FerramentasDeDetalhe: React.FC<IFerramentasDeDetalheProps> = ({
 			{(mostrarBotaoSalvarEFechar && !mostrarBotaoSalvarEFecharCarregando && !smDown && !mdDown) && (
 				<Button variant='outlined' color='primary' onClick={clicarEmSalvarEFechar} startIcon={<Icon>save</Icon>} disableElevation>
 					<Typography variant='button' whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
-						Salvar e voltar
+						Salvar e fechar
 					</Typography>
 				</Button>
 			)}
