@@ -2,24 +2,20 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { LayoutBaseDePagina } from "../../shared/layouts";
-import { PessoasService } from "../../shared/services/api/pessoas/PessoasService";
+import { CidadesService } from "../../shared/services/api/cidades/CidadesService";
 import { VTextField, VForm, useVForm, IVFormErrors } from "../../shared/forms";
 import { Box, Grid, LinearProgress, Paper, Typography } from "@mui/material";
 import * as yup from 'yup';
 
 interface IFormData {
-	email: string;
-	nomeCompleto: string;
-	cidadeId: number
+	nome: string;
 }
 
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
-	nomeCompleto: yup.string().required().min(3),
-	email: yup.string().required().email(),
-	cidadeId: yup.number().required(),
+	nome: yup.string().required().min(3),
 });
 
-export const DetalheDePessoas: React.FC = () => {
+export const DetalheDeCidades: React.FC = () => {
 	const { id = 'nova' } = useParams<'id'>();
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
@@ -30,22 +26,20 @@ export const DetalheDePessoas: React.FC = () => {
 		if (id !== 'nova') {
 			setIsLoading(true);
 
-			PessoasService.getById(Number(id))
+			CidadesService.getById(Number(id))
 				.then((result) => {
 					setIsLoading(false);
 					if (result instanceof Error) {
 						alert(result.message);
-						navigate('/pessoas');
+						navigate('/cidades');
 					} else {
-						setNome(result.nomeCompleto);
+						setNome(result.nome);
 						formRef.current?.setData(result);
 					}
 				})
 		} else {
-			formRef.current?.setData({
-				nomeCompleto: '',
-				email: '',
-				cidadeId: ''
+			formRef.current?.setData({				
+				nome: ''
 			})
 		}
 	}, [id]);
@@ -56,28 +50,28 @@ export const DetalheDePessoas: React.FC = () => {
 			.then((dadosValidados) => {
 				setIsLoading(true);
 				if (id === 'nova') {
-					PessoasService.create(dadosValidados)
+					CidadesService.create(dadosValidados)
 						.then((e) => {
 							setIsLoading(false);
 							if (e instanceof Error) {
 								alert(e.message);
 							} else {
 								if (isSaveAndClose()) {
-									navigate('/pessoas');
+									navigate('/cidades');
 								} else {
-									navigate(`/pessoas/detalhe/${e}`)
+									navigate(`/cidades/detalhe/${e}`)
 								}
 							}
 						})
 				} else {
-					PessoasService.updateById(Number(id), { id: Number(id), ...dadosValidados })
+					CidadesService.updateById(Number(id), { id: Number(id), ...dadosValidados })
 						.then((e) => {
 							setIsLoading(false);
 							if (e instanceof Error) {
 								alert(e.message);
 							} else {
 								if (isSaveAndClose()) {
-									navigate('/pessoas');
+									navigate('/cidades');
 								}
 							}
 						})
@@ -97,13 +91,13 @@ export const DetalheDePessoas: React.FC = () => {
 	}
 
 	const handleDelete = (id: number) => {
-		PessoasService.deleteById(id)
+		CidadesService.deleteById(id)
 			.then(result => {
 				if (result instanceof Error) {
 					alert(result.message);
 				} else {
 					alert('Registro apagado com sucesso.');
-					navigate('/pessoas');
+					navigate('/cidades');
 				}
 			});
 
@@ -113,7 +107,7 @@ export const DetalheDePessoas: React.FC = () => {
 
 	return (
 		<LayoutBaseDePagina
-			titulo={id === 'nova' ? 'Nova pessoa' : nome}
+			titulo={id === 'nova' ? 'Nova cidade' : nome}
 			barraDeFerramentas={
 				<FerramentasDeDetalhe
 					textoBotaoNovo="Nova"
@@ -124,8 +118,8 @@ export const DetalheDePessoas: React.FC = () => {
 					clicarEmSalvar={save}
 					clicarEmSalvarEFechar={saveAndClose}
 					clicarEmApagar={() => handleDelete(Number(id))}
-					clicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
-					clicarEmVoltar={() => navigate('/pessoas')}
+					clicarEmNovo={() => navigate('/cidades/detalhe/nova')}
+					clicarEmVoltar={() => navigate('/cidades')}
 				/>
 			}>
 
@@ -144,19 +138,9 @@ export const DetalheDePessoas: React.FC = () => {
 
 						<Grid container item direction='row'>
 							<Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-								<VTextField fullWidth name="nomeCompleto" label="Nome completo" disabled={isLoading} onChange={e => setNome(e.target.value)} />
+								<VTextField fullWidth name="nome" label="Nome" disabled={isLoading} onChange={e => setNome(e.target.value)} />
 							</Grid>
-						</Grid>
-						<Grid container item direction='row'>
-							<Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-								<VTextField fullWidth name="email" label="Email" disabled={isLoading} />
-							</Grid>
-						</Grid>
-						<Grid container item direction='row'>
-							<Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-								<VTextField fullWidth name="cidadeId" label="Cidade" disabled={isLoading} />
-							</Grid>
-						</Grid>
+						</Grid>						
 					</Grid>
 				</Box>
 			</VForm>

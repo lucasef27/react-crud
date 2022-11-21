@@ -2,9 +2,9 @@
   "pessoas": [
     {
       "id": 2,
+      "nomeCompleto": "Eduardo Franco",
       "email": "eduardo@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Eduardo Franco"
+      "cidadeId": 1
     },
     {
       "id": 3,
@@ -91,10 +91,28 @@
       "nomeCompleto": "Roberto Carlos"
     },
     {
-      "email": "Jose",
-      "nomeCompleto": "jose@gmail.com",
-      "cidadeId": "1",
-      "id": 17
+      "id": 17,
+      "nomeCompleto": "Jose Verde",
+      "email": "jose@gmail.com",
+      "cidadeId": "1"
+    },
+    {
+      "nomeCompleto": "Lucas Franco",
+      "email": "lucas@mail.com",
+      "cidadeId": "2",
+      "id": 18
+    },
+    {
+      "id": 19,
+      "nomeCompleto": "",
+      "email": "",
+      "cidadeId": ""
+    }
+  ],
+  "cidades": [
+    {
+      "id": 1,
+      "nome": "Jaraguá do Sul"
     }
   ]
 }
