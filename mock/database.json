@@ -113,6 +113,42 @@
     {
       "id": 1,
       "nome": "Jaraguá do Sul"
+    },
+    {
+      "id": 2,
+      "nome": "Indaial"
+    },
+    {
+      "nome": "Joinville",
+      "id": 3
+    },
+    {
+      "nome": "Blumenau",
+      "id": 4
+    },
+    {
+      "nome": "Rio do Sul",
+      "id": 5
+    },
+    {
+      "nome": "Timbó",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "nome": "Rio dos Cedros"
+    },
+    {
+      "nome": "Brusque",
+      "id": 8
+    },
+    {
+      "nome": "Florianópolis",
+      "id": 9
+    },
+    {
+      "nome": "Corupá",
+      "id": 10
     }
   ]
 }
